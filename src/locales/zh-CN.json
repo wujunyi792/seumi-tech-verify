@@ -1,0 +1,15 @@
+{
+  "app": {
+    "description": "Hduer的专属工具平台",
+    "title": "综评管理后台"
+  },
+  "be-happy": "开心起来！",
+  "hi": "你好",
+  "menu": {
+    "docs": "文档",
+    "help": "帮助",
+    "home": "主页",
+    "semi": "Semi"
+  },
+  "welcome": "欢迎光临 Umi 的世界！"
+}

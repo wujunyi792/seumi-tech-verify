@@ -1,0 +1,15 @@
+{
+  "app": {
+    "description": "Hduer’s exclusive tool platform",
+    "title": "Comprehensive evaluation management backend"
+  },
+  "be-happy": "be happy!",
+  "hi": "Hello",
+  "menu": {
+    "docs": "Document",
+    "help": "Help",
+    "home": "Home page",
+    "semi": "Semi"
+  },
+  "welcome": "Welcome to Umi's world!"
+}
