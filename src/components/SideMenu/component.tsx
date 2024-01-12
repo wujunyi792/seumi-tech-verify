@@ -2,13 +2,15 @@ import { AppMenu, IMenu } from '@/routers/menu';
 import { useSystemStore } from '@/store/system';
 import { IconSemiLogo } from '@douyinfe/semi-icons';
 import { Nav } from '@douyinfe/semi-ui';
-import { useMemo } from 'react';
-import { FormattedMessage, useIntl, useNavigate } from 'umi';
+import { useEffect, useMemo, useState } from 'react';
+import { FormattedMessage, useIntl, useLocation, useNavigate } from 'umi';
 
 export default function SideMenu() {
   const navigate = useNavigate();
   const system = useSystemStore();
+  const location = useLocation();
   const intl = useIntl();
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   function renderMenu(menus: IMenu): React.ReactNode {
     return (
@@ -45,7 +47,32 @@ export default function SideMenu() {
       </>
     );
   }
+
   const menus = useMemo(() => renderMenu(AppMenu), [AppMenu, system.lang]);
+
+  useEffect(() => {
+    const menuDp = function (menus: IMenu): string | undefined {
+      for (const menu of menus) {
+        if (menu.children) {
+          const dp = menuDp(menu.children);
+          if (dp) {
+            return dp;
+          }
+        }
+        if (menu.target === location?.pathname) {
+          return menu.itemKey;
+        }
+      }
+      return undefined;
+    };
+
+    const dp = menuDp(AppMenu);
+
+    if (dp) {
+      setSelectedKeys([dp]);
+    }
+  }, [location]);
+
   return (
     <Nav
       className="h-full"
@@ -54,6 +81,7 @@ export default function SideMenu() {
       onOpenChange={({ openKeys }) => {
         system.setMenuOpenKeys(openKeys || []);
       }}
+      selectedKeys={selectedKeys}
       defaultIsCollapsed
     >
       <Nav.Header
