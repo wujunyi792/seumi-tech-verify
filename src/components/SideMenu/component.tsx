@@ -54,10 +54,15 @@ export default function SideMenu() {
       onOpenChange={({ openKeys }) => {
         system.setMenuOpenKeys(openKeys || []);
       }}
+      defaultIsCollapsed
     >
       <Nav.Header
         logo={<IconSemiLogo style={{ height: '36px', fontSize: 36 }} />}
-        text={<FormattedMessage id="app.title" />}
+        text={
+          <div className=" whitespace-normal">
+            <FormattedMessage id="app.title" />
+          </div>
+        }
       />
       {menus}
       <Nav.Footer collapseButton={true} />
